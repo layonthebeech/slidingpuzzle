@@ -113,8 +113,9 @@ $(document).ready(function() {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType]
           }, {
+            duration:1,
             mobileHA:true
-          }, 25)
+          }, 5)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
@@ -127,8 +128,9 @@ $(document).ready(function() {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType]
           }, {
+            duration:1,
             mobileHA:true
-          }, 25)
+          }, 5)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
@@ -145,8 +147,9 @@ $(document).ready(function() {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]
           },{
+            duration:1,
             mobileHA:true
-          }, 25)
+          })
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]]
           t1.push(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.push(twoDArray[i].splice(tileIndex[1], 1)[0]);
@@ -166,8 +169,9 @@ $(document).ready(function() {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]
           }, {
+            duration:1,
             mobileHA:true
-          }, 25)
+          }, 1)
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]]
           t1.unshift(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.unshift(twoDArray[i].splice(tileIndex[1], 1)[0]);
