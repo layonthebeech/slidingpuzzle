@@ -2,6 +2,7 @@ body {
   background-color:#F1F0CC;
   cursor: default;
   color:#546A7B;
+  -webkit-transform: translateZ(0);
 }
 
 .board{
@@ -17,7 +18,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   height:100px;
-  width:325px; 
+  width:325px;
 }
 
 .reset{
@@ -66,7 +67,7 @@ body {
   border-radius:10px;
 }
 #tiles{
- margin: 0 auto; 
+ margin: 0 auto;
   position:absolute;
   width:325px;
   transform:translate(0,30px)
