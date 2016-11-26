@@ -49,7 +49,7 @@ $(document).ready(function() {
     win.id = "win"
     win.className="winBox"
     win.innerHTML = '<div class="wonText"> You Won! </div>'+
-                     '<div class="playAgain"> Play Again <\div>';
+                     '<div class="playAgain"> Play Again </div>';
     $('.playArea').append(win);
     $('#tiles').css('pointer-events','none')
     $('.playAgain').click(function(){
@@ -59,7 +59,7 @@ $(document).ready(function() {
       $('.click').click(function(){
         startGame($(this))
       });
-      
+
     });
     newHighScore();
   }
@@ -112,6 +112,8 @@ $(document).ready(function() {
         for (var i = tileIndex[1]; i <= emptyIndex[1]; i++) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType]
+          }, {
+            mobileHA:true
           }, 25)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
@@ -124,6 +126,8 @@ $(document).ready(function() {
         for (var i = tileIndex[1]; i >= emptyIndex[1]; i--) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType]
+          }, {
+            mobileHA:true
           }, 25)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
@@ -140,6 +144,8 @@ $(document).ready(function() {
         for (var i = tileIndex[0]; i <= emptyIndex[0]; i++) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]
+          },{
+            mobileHA:true
           }, 25)
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]]
           t1.push(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
@@ -159,6 +165,8 @@ $(document).ready(function() {
         for (var i = tileIndex[0]; i >= emptyIndex[0]; i--) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]
+          }, {
+            mobileHA:true
           }, 25)
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]]
           t1.unshift(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
