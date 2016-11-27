@@ -29,7 +29,7 @@ $(document).ready(function() {
         var seconds = (times[time] - minutes * 60) < 10 ? '0' + String(times[time] - minutes * 60) : times[time] - minutes * 60;
         $('.score'+time).text(minutes +':'+seconds);
       } else {
-        $('.score'+time).text('--');
+        $('.score'+time).text('--:--');
       }
     }
   }
