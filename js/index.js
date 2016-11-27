@@ -22,7 +22,7 @@ $(document).ready(function() {
       '5' : localStorage.getItem('5'),
       '6' : localStorage.getItem('6')
     }
-    console.log(times)
+    console.log('yes',times)
     for(var time in times) {
       if(times[time]) {
         var minutes = Math.floor(times[time] / 60) < 10 ? '0' + String(Math.floor(times[time] / 60)) : Math.floor(times[time] / 60);
