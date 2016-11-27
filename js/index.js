@@ -228,7 +228,7 @@ $(document).ready(function() {
     for (var i = 0; i < (gameSize * gameSize) - 1; i++) {
       numbers.push(i + 1);
     }
-    shuffledArray = numbers //shuffle(numbers)
+    shuffledArray = shuffle(numbers)
     twoDArray = [];
     var q = 0;
     for (var i = 0; i < Math.sqrt(shuffledArray.length); i++) {
