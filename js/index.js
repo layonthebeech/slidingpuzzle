@@ -17,12 +17,34 @@ $(document).ready(function() {
 
   function checkHighScore() {
 
+    var times = {
+      '4' : localStorage.getItem('4'),
+      '5' : localStorage.getItem('5'),
+      '6' : localStorage.getItem('6')
+    }
+    console.log(times)
+    for(var time in times) {
+      if(times[time]) {
+        var minutes = Math.floor(times[time] / 60) < 10 ? '0' + String(Math.floor(times[time] / 60)) : Math.floor(times[time] / 60);
+        var seconds = (times[time] - minutes * 60) < 10 ? '0' + String(times[time] - minutes * 60) : times[time] - minutes * 60;
+        $('.score'+time).text(minutes +':'+seconds);
+      } else {
+        $('.score'+time).text('--');
+      }
+    }
   }
+
   checkHighScore();
 
   function newHighScore() {
-    $('.timer').text();
-
+    var minutes = parseInt($('.clock').text().split(':')[0]);
+    var seconds = parseInt($('.clock').text().split(':')[1]);
+    var newScoreSeconds = 0;
+    newScoreSeconds+= (minutes * 60) + seconds;
+    if(localStorage.getItem(gameType) > newScoreSeconds ) {
+      localStorage.setItem(gameType, newScoreSeconds);
+      $('.score'+gameType).text($('.clock').text());
+    }
   }
 
   function startTimer() {
@@ -113,6 +135,7 @@ $(document).ready(function() {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType]
           }, {
+            delay:false,
             duration:1,
             mobileHA:true
           }, 5)
@@ -128,6 +151,7 @@ $(document).ready(function() {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType]
           }, {
+            delay:false,
             duration:1,
             mobileHA:true
           }, 5)
@@ -147,6 +171,7 @@ $(document).ready(function() {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]
           },{
+            delay:false,
             duration:1,
             mobileHA:true
           })
@@ -169,6 +194,7 @@ $(document).ready(function() {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]
           }, {
+            delay:false,
             duration:1,
             mobileHA:true
           }, 1)
@@ -202,7 +228,7 @@ $(document).ready(function() {
     for (var i = 0; i < (gameSize * gameSize) - 1; i++) {
       numbers.push(i + 1);
     }
-    shuffledArray = shuffle(numbers)
+    shuffledArray = numbers //shuffle(numbers)
     twoDArray = [];
     var q = 0;
     for (var i = 0; i < Math.sqrt(shuffledArray.length); i++) {

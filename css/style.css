@@ -35,14 +35,18 @@ body {
 
 .timer {
   width:30%;
-  height:96px;
-  display:inline-block;
   font-size:20px;
+  display:inline-block;
 }
 
 .highscore {
   width:30%;
+  height:100px;
   font-size:20px;
+  display:inline-block;
+  line-height: 20px;
+}
+.scores {
   display:inline-block;
 }
 
