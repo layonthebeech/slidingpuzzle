@@ -134,11 +134,7 @@ $(document).ready(function() {
         for (var i = tileIndex[1]; i <= emptyIndex[1]; i++) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType]
-          }, {
-            delay:false,
-            duration:1,
-            mobileHA:true
-          }, 5)
+          }, 25)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
@@ -150,11 +146,7 @@ $(document).ready(function() {
         for (var i = tileIndex[1]; i >= emptyIndex[1]; i--) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType]
-          }, {
-            delay:false,
-            duration:1,
-            mobileHA:true
-          }, 5)
+          }, 25)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
@@ -170,11 +162,7 @@ $(document).ready(function() {
         for (var i = tileIndex[0]; i <= emptyIndex[0]; i++) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]
-          },{
-            delay:false,
-            duration:1,
-            mobileHA:true
-          })
+          },25)
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]]
           t1.push(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.push(twoDArray[i].splice(tileIndex[1], 1)[0]);
@@ -193,11 +181,7 @@ $(document).ready(function() {
         for (var i = tileIndex[0]; i >= emptyIndex[0]; i--) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]
-          }, {
-            delay:false,
-            duration:1,
-            mobileHA:true
-          }, 1)
+          },25)
           tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]]
           t1.unshift(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.unshift(twoDArray[i].splice(tileIndex[1], 1)[0]);
@@ -261,6 +245,7 @@ $(document).ready(function() {
   }
 
   $('.click').click(function() {
+    console.log('yup')
     startGame($(this));
   });
 
