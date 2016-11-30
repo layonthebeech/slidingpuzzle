@@ -41,7 +41,11 @@ $(document).ready(function() {
     var seconds = parseInt($('.clock').text().split(':')[1]);
     var newScoreSeconds = 0;
     newScoreSeconds+= (minutes * 60) + seconds;
-    if(localStorage.getItem(gameType) > newScoreSeconds ) {
+    console.log('set')
+    if(localStorage.getItem(gameType) && localStorage.getItem(gameType) > newScoreSeconds ) {
+      localStorage.setItem(gameType, newScoreSeconds);
+      $('.score'+gameType).text($('.clock').text());
+    } else if(!localStorage.getItem(gameType)) {
       localStorage.setItem(gameType, newScoreSeconds);
       $('.score'+gameType).text($('.clock').text());
     }
@@ -212,7 +216,7 @@ $(document).ready(function() {
     for (var i = 0; i < (gameSize * gameSize) - 1; i++) {
       numbers.push(i + 1);
     }
-    shuffledArray = shuffle(numbers)
+    shuffledArray = numbers;//shuffle(numbers)
     twoDArray = [];
     var q = 0;
     for (var i = 0; i < Math.sqrt(shuffledArray.length); i++) {
