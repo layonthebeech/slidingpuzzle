@@ -95,6 +95,7 @@ body {
   margin-bottom:5px;
   border-radius:10px;
   will-change:transform;
+  pointer-events:none;
 }
 
 .tile4 {

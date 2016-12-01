@@ -75,7 +75,7 @@ $(document).ready(function() {
     win.id = "win"
     win.className="winBox"
     win.innerHTML = '<div class="wonText"> You Won! </div>'+
-                     '<div class="playAgain"> Play Again </div>';
+    '<div class="playAgain"> Play Again </div>';
     $('.playArea').append(win);
     $('#tiles').css('pointer-events','none')
     $('.playAgain').click(function(){
@@ -96,38 +96,30 @@ $(document).ready(function() {
     var newBlankIndex = [];
     var availableShifts = [];
     var shiftIndex;
-    if(counter === 100) {
+    if(counter === 1000) {
       console.log(array)
       return array;
     } else {
-    if(blankIndex[0]-1 >= 0) {
-    //console.log('up',array[blankIndex[0]-1][blankIndex[1]])
-    availableShifts.push([blankIndex[0]-1,blankIndex[1]])
-    }
-    if(blankIndex[0]+1 < array.length){
-    //console.log('down',array[blankIndex[0]+1][blankIndex[1]])
-    availableShifts.push([blankIndex[0]+1,blankIndex[1]])
-    }
-    if(blankIndex[1]-1 >= 0) {
-    //console.log('left',array[blankIndex[0]][blankIndex[1]-1])
-availableShifts.push([blankIndex[0],blankIndex[1]-1])
-    }
-    if(blankIndex[1]+1 < array.length) {
-    //console.log('right',array[blankIndex[0]][blankIndex[1]+1])
-    availableShifts.push([blankIndex[0],blankIndex[1]+1])
-  }
-//  console.log('avail', availableShifts)
-  shiftIndex = Math.floor(Math.random() * availableShifts.length)
-//  console.log(shiftIndex)
-  var shift = availableShifts[shiftIndex]
-//  console.log('shift',shift)
- array[blankIndex[0]][blankIndex[1]] = array[shift[0]][shift[1]]
-  array[shift[0]][shift[1]] = undefined;
-    blankIndex = availableShifts[shiftIndex]
-  //console.log(array)
-      return  shuffle(array,blankIndex,counter+=1);
+      if(blankIndex[0]-1 >= 0) {
+        availableShifts.push([blankIndex[0]-1,blankIndex[1]])
       }
+      if(blankIndex[0]+1 < array.length){
+        availableShifts.push([blankIndex[0]+1,blankIndex[1]])
+      }
+      if(blankIndex[1]-1 >= 0) {
+        availableShifts.push([blankIndex[0],blankIndex[1]-1])
+      }
+      if(blankIndex[1]+1 < array.length) {
+        availableShifts.push([blankIndex[0],blankIndex[1]+1])
+      }
+      shiftIndex = Math.floor(Math.random() * availableShifts.length)
+      var shift = availableShifts[shiftIndex]
+      array[blankIndex[0]][blankIndex[1]] = array[shift[0]][shift[1]]
+      array[shift[0]][shift[1]] = undefined;
+      blankIndex = availableShifts[shiftIndex]
+      return  shuffle(array,blankIndex,counter+=1);
     }
+  }
 
 
 
@@ -160,6 +152,7 @@ availableShifts.push([blankIndex[0],blankIndex[1]-1])
       }
     }
     var numberOfMoves = 0;
+    console.log(tileIndex,emptyIndex)
     if (tileIndex[0] === emptyIndex[0]) {
       numberOfMoves = Math.abs(emptyIndex[1] - tileIndex[1])
       if (tileIndex[1] < emptyIndex[1]) {
@@ -227,6 +220,7 @@ availableShifts.push([blankIndex[0],blankIndex[1]-1])
         }
       }
     }
+    console.log(twoDArray,tileCoordinates)
     console.log(checkScore());
     if (checkScore() === true) {
       winGame();
@@ -268,13 +262,14 @@ availableShifts.push([blankIndex[0],blankIndex[1]-1])
           tile.innerHTML = String(shuffledArray[i][j]);
           $('#tiles').append(tile);
         } else {
-        var tile = document.createElement('div');
-        tile.id = String(shuffledArray[i][j]);
-        tile.className = "blank tile" + gameSize;
-        tile.innerHTML = '</br>';
-        $('#tiles').append(tile);
+          var tile = document.createElement('div');
+          tile.id = String(shuffledArray[i][j]);
+          tile.className = "blank tile" + gameSize;
+          tile.innerHTML = '</br>';
+          $('#tiles').append(tile);
+        }
       }
-      }
+      
       $('.clock').text('00:00');
       startTimer();
     }
