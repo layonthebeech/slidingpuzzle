@@ -90,17 +90,46 @@ $(document).ready(function() {
     newHighScore();
   }
 
-  function shuffle(array) {
+  function shuffle(array,blankIndex, counter) {
+    console.log(array,blankIndex,counter)
     var shuffled = [];
-    var copiedArray = array.slice(0);
-    while (shuffled.length < array.length) {
-      //console.log(shuffled.length,array.length)
-      var i = Math.floor(Math.random() * copiedArray.length)
-      shuffled.push(copiedArray[i])
-      copiedArray.splice(i, 1)
+    var newBlankIndex = [];
+    var availableShifts = [];
+    var shiftIndex;
+    if(counter === 100) {
+      console.log(array)
+      return array;
+    } else {
+    if(blankIndex[0]-1 >= 0) {
+    //console.log('up',array[blankIndex[0]-1][blankIndex[1]])
+    availableShifts.push([blankIndex[0]-1,blankIndex[1]])
     }
-    return shuffled;
+    if(blankIndex[0]+1 < array.length){
+    //console.log('down',array[blankIndex[0]+1][blankIndex[1]])
+    availableShifts.push([blankIndex[0]+1,blankIndex[1]])
+    }
+    if(blankIndex[1]-1 >= 0) {
+    //console.log('left',array[blankIndex[0]][blankIndex[1]-1])
+availableShifts.push([blankIndex[0],blankIndex[1]-1])
+    }
+    if(blankIndex[1]+1 < array.length) {
+    //console.log('right',array[blankIndex[0]][blankIndex[1]+1])
+    availableShifts.push([blankIndex[0],blankIndex[1]+1])
   }
+//  console.log('avail', availableShifts)
+  shiftIndex = Math.floor(Math.random() * availableShifts.length)
+//  console.log(shiftIndex)
+  var shift = availableShifts[shiftIndex]
+//  console.log('shift',shift)
+ array[blankIndex[0]][blankIndex[1]] = array[shift[0]][shift[1]]
+  array[shift[0]][shift[1]] = undefined;
+    blankIndex = availableShifts[shiftIndex]
+  //console.log(array)
+      return  shuffle(array,blankIndex,counter+=1);
+      }
+    }
+
+
 
   function checkScore() {
     var q = 1
@@ -216,29 +245,35 @@ $(document).ready(function() {
     for (var i = 0; i < (gameSize * gameSize) - 1; i++) {
       numbers.push(i + 1);
     }
-    shuffledArray = shuffle(numbers)
+
     twoDArray = [];
     var q = 0;
-    for (var i = 0; i < Math.sqrt(shuffledArray.length); i++) {
+    for (var i = 0; i < Math.sqrt(numbers.length); i++) {
       twoDArray[i] = [];
       tileCoordinates[i] = [];
-      for (var j = 0; j < Math.sqrt(shuffledArray.length); j++) {
-        twoDArray[i][j] = shuffledArray[q]
+      for (var j = 0; j < Math.sqrt(numbers.length); j++) {
+        twoDArray[i][j] = numbers[q]
         tileCoordinates[i][j] = [0, 0]
         q++;
       }
     }
-    for (var i = 0; i < twoDArray.length; i++) {
-      for (var j = 0; j < twoDArray[i].length; j++) {
-        if (i !== twoDArray.length - 1 || j !== twoDArray[i].length - 1) {
+    shuffledArray = shuffle(twoDArray,[twoDArray.length-1,twoDArray[twoDArray.length-1].length-1],0)
+    console.log(shuffledArray)
+    for (var i = 0; i < shuffledArray.length; i++) {
+      for (var j = 0; j < shuffledArray[i].length; j++) {
+        if(shuffledArray[i][j] !== undefined) {
           var tile = document.createElement('div');
-          tile.id = String(twoDArray[i][j]);
+          tile.id = String(shuffledArray[i][j]);
           tile.className = "tile tile" + gameSize;
-          tile.innerHTML = String(twoDArray[i][j]);
+          tile.innerHTML = String(shuffledArray[i][j]);
           $('#tiles').append(tile);
         } else {
-          twoDArray[i][j] === 'empty'
-        }
+        var tile = document.createElement('div');
+        tile.id = String(shuffledArray[i][j]);
+        tile.className = "blank tile" + gameSize;
+        tile.innerHTML = '</br>';
+        $('#tiles').append(tile);
+      }
       }
       $('.clock').text('00:00');
       startTimer();
