@@ -4,7 +4,6 @@ body {
   color:#546A7B;
   -webkit-transform: translateZ(0);
 }
-
 .board{
   margin-left:auto;
   margin-right:auto;
@@ -13,14 +12,12 @@ body {
   border-radius:10%;
   background-color:#B7E3CC;
 }
-
 .timerScore {
   margin-left:auto;
   margin-right:auto;
   height:100px;
   width:325px;
 }
-
 .reset{
   width:80px;
   height:55px;
@@ -32,13 +29,11 @@ body {
   font-size:20px;
   float:right;
 }
-
 .timer {
   width:30%;
   font-size:20px;
   display:inline-block;
 }
-
 .highscore {
   width:90px;
   height:100px;
@@ -49,19 +44,16 @@ body {
 .scores {
   display:inline-block;
 }
-
 .newGame {
   text-align:center;
   width:300px;
   position:absolute;
   transform:translate(10px,0)
 }
-
 .click {
   display:inline-block;
   font-size:20px;
 }
-
 .playArea {
   margin-left:auto;
   margin-right:auto;
@@ -71,21 +63,19 @@ body {
   border-radius:10px;
 }
 #tiles{
- margin: 0 auto;
   position:absolute;
   width:325px;
-  transform:translate(0,30px)
+  transform:translate(0,20px);
 }
-
 .tile {
   text-align:center;
   font-size:30px;
   cursor: default;
   background-color:white;
-  margin-right:5px;
+  margin-right:3px;
+  margin-left:3px;
   margin-bottom:5px;
   border-radius:10px;
-  will-change:transform;
 }
 .blank {
   text-align:center;
@@ -97,25 +87,21 @@ body {
   will-change:transform;
   pointer-events:none;
 }
-
 .tile4 {
   width:75px;
   height:75px;
   display:inline-block;
 }
-
 .tile5 {
   width:59px;
   height:59px;
   display:inline-block;
 }
-
 .tile6 {
   width:48px;
   height:48px;
   display:inline-block;
 }
-
 .winBox {
   width:325px;
   height:100px;
@@ -127,10 +113,6 @@ body {
   margin-left:auto;
   margin-right:auto;
   border-radius:30px;
-}
-
-.wonText {
-
 }
 .playAgain {
   width:100px;

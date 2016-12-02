@@ -55,14 +55,12 @@ $(document).ready(function() {
     var time = 0;
     clearInterval(timerID)
     timerID = setInterval(function() {
-      //console.log(timerID)
       time++;
       var minutes = Math.floor(time / 60) < 10 ? '0' + String(Math.floor(time / 60)) : Math.floor(time / 60);
       var seconds = (time - minutes * 60) < 10 ? '0' + String(time - minutes * 60) : time - minutes * 60;
       //console.log(seconds)
       $('.clock').text(minutes + ':' + seconds);
     }, 1000);
-    //clearInterval(intervalID)
   }
 
   function stopTimer() {
@@ -77,7 +75,7 @@ $(document).ready(function() {
     win.innerHTML = '<div class="wonText"> You Won! </div>'+
     '<div class="playAgain"> Play Again </div>';
     $('.playArea').append(win);
-    $('#tiles').css('pointer-events','none')
+    $('#tiles').css('pointer-events','none');
     $('.playAgain').click(function(){
       $('#tiles').remove();
       $('.winBox').remove();
@@ -91,32 +89,30 @@ $(document).ready(function() {
   }
 
   function shuffle(array,blankIndex, counter) {
-    console.log(array,blankIndex,counter)
     var shuffled = [];
     var newBlankIndex = [];
     var availableShifts = [];
     var shiftIndex;
     if(counter === 1000) {
-      console.log(array)
       return array;
     } else {
       if(blankIndex[0]-1 >= 0) {
-        availableShifts.push([blankIndex[0]-1,blankIndex[1]])
+        availableShifts.push([blankIndex[0]-1,blankIndex[1]]);
       }
       if(blankIndex[0]+1 < array.length){
-        availableShifts.push([blankIndex[0]+1,blankIndex[1]])
+        availableShifts.push([blankIndex[0]+1,blankIndex[1]]);
       }
       if(blankIndex[1]-1 >= 0) {
-        availableShifts.push([blankIndex[0],blankIndex[1]-1])
+        availableShifts.push([blankIndex[0],blankIndex[1]-1]);
       }
       if(blankIndex[1]+1 < array.length) {
-        availableShifts.push([blankIndex[0],blankIndex[1]+1])
+        availableShifts.push([blankIndex[0],blankIndex[1]+1]);
       }
       shiftIndex = Math.floor(Math.random() * availableShifts.length)
-      var shift = availableShifts[shiftIndex]
-      array[blankIndex[0]][blankIndex[1]] = array[shift[0]][shift[1]]
+      var shift = availableShifts[shiftIndex];
+      array[blankIndex[0]][blankIndex[1]] = array[shift[0]][shift[1]];
       array[shift[0]][shift[1]] = undefined;
-      blankIndex = availableShifts[shiftIndex]
+      blankIndex = availableShifts[shiftIndex];
       return  shuffle(array,blankIndex,counter+=1);
     }
   }
@@ -127,7 +123,6 @@ $(document).ready(function() {
     var q = 1
     for (var i = 0; i < twoDArray.length; i++) {
       for (var j = 0; j < twoDArray[i].length; j++) {
-        console.log(q, twoDArray[i][j])
         if (twoDArray[i][j] !== q && twoDArray[i][j] !== undefined) {
           return false;
         } else {
@@ -152,16 +147,15 @@ $(document).ready(function() {
       }
     }
     var numberOfMoves = 0;
-    console.log(tileIndex,emptyIndex)
     if (tileIndex[0] === emptyIndex[0]) {
-      numberOfMoves = Math.abs(emptyIndex[1] - tileIndex[1])
+      numberOfMoves = Math.abs(emptyIndex[1] - tileIndex[1]);
       if (tileIndex[1] < emptyIndex[1]) {
         console.log('move right')
         for (var i = tileIndex[1]; i <= emptyIndex[1]; i++) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType]
-          }, 25)
-          tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
+          },1)
+          tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] + tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]];
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
         tileCoordinates[tileIndex[0]].splice(tileIndex[1], 0, t1[0]);
@@ -172,7 +166,7 @@ $(document).ready(function() {
         for (var i = tileIndex[1]; i >= emptyIndex[1]; i--) {
           $('#' + String(twoDArray[tileIndex[0]][i])).velocity({
             translateX: tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType]
-          }, 25)
+          },1)
           tileCoordinates[tileIndex[0]][i] = [tileCoordinates[tileIndex[0]][i][0] - tileDimensions[gameType], tileCoordinates[tileIndex[0]][i][1]]
         }
         var t1 = tileCoordinates[tileIndex[0]].splice(emptyIndex[1], 1);
@@ -188,40 +182,39 @@ $(document).ready(function() {
         for (var i = tileIndex[0]; i <= emptyIndex[0]; i++) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]
-          },25)
-          tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]]
+          },1)
+          tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] + tileDimensions[gameType]];
           t1.push(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.push(twoDArray[i].splice(tileIndex[1], 1)[0]);
         }
         t1.unshift(t1.pop())
         t2.unshift(t2.pop())
         for (var i = 0, j = tileIndex[0]; i < t2.length; i++, j++) {
-          tileCoordinates[j].splice(tileIndex[1], 0, t1[i])
+          tileCoordinates[j].splice(tileIndex[1], 0, t1[i]);
           twoDArray[j].splice(tileIndex[1], 0, t2[i]);
         }
 
       } else if (tileIndex[0] > emptyIndex[0]) {
-        console.log('Move Up')
+        console.log('Move Up');
         var t2 = [];
         var t1 = [];
         for (var i = tileIndex[0]; i >= emptyIndex[0]; i--) {
           $('#' + String(twoDArray[i][tileIndex[1]])).velocity({
             translateY: tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]
-          },25)
-          tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]]
+          },1)
+          tileCoordinates[i][tileIndex[1]] = [tileCoordinates[i][tileIndex[1]][0], tileCoordinates[i][tileIndex[1]][1] - tileDimensions[gameType]];
           t1.unshift(tileCoordinates[i].splice(tileIndex[1], 1)[0]);
           t2.unshift(twoDArray[i].splice(tileIndex[1], 1)[0]);
         }
-        t1.push(t1.shift())
-        t2.push(t2.shift())
+        t1.push(t1.shift());
+        t2.push(t2.shift());
         for (var i = 0, j = emptyIndex[0]; i < t2.length; i++, j++) {
           tileCoordinates[j].splice(tileIndex[1], 0, t1[i]);
           twoDArray[j].splice(tileIndex[1], 0, t2[i]);
         }
       }
     }
-    console.log(twoDArray,tileCoordinates)
-    console.log(checkScore());
+
     if (checkScore() === true) {
       winGame();
     }
@@ -246,13 +239,12 @@ $(document).ready(function() {
       twoDArray[i] = [];
       tileCoordinates[i] = [];
       for (var j = 0; j < Math.sqrt(numbers.length); j++) {
-        twoDArray[i][j] = numbers[q]
-        tileCoordinates[i][j] = [0, 0]
+        twoDArray[i][j] = numbers[q];
+        tileCoordinates[i][j] = [0, 0];
         q++;
       }
     }
-    shuffledArray = shuffle(twoDArray,[twoDArray.length-1,twoDArray[twoDArray.length-1].length-1],0)
-    console.log(shuffledArray)
+    shuffledArray = shuffle(twoDArray,[twoDArray.length-1,twoDArray[twoDArray.length-1].length-1],0);
     for (var i = 0; i < shuffledArray.length; i++) {
       for (var j = 0; j < shuffledArray[i].length; j++) {
         if(shuffledArray[i][j] !== undefined) {
@@ -269,7 +261,7 @@ $(document).ready(function() {
           $('#tiles').append(tile);
         }
       }
-      
+
       $('.clock').text('00:00');
       startTimer();
     }
@@ -279,7 +271,6 @@ $(document).ready(function() {
   }
 
   $('.click').click(function() {
-    console.log('yup')
     startGame($(this));
   });
 
