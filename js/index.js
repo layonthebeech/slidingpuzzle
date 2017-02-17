@@ -43,7 +43,8 @@ $(document).ready(function() {
     var minutes = parseInt($('.clock').text().split(':')[0]);
     var seconds = parseInt($('.clock').text().split(':')[1]);
       //change the score to seconds
-    var  newScoreSeconds += (minutes * 60) + seconds;
+    //newScoreSeconds = 0;
+    var newScoreSeconds = (minutes * 60) + seconds;
     //if the time is less than the high score set it
     if(localStorage.getItem(gameType) && localStorage.getItem(gameType) > newScoreSeconds ) {
       localStorage.setItem(gameType, newScoreSeconds);
